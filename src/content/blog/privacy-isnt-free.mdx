@@ -1,0 +1,71 @@
+---
+title: "Privacy Isn't Free — But It Should Be Cheap"
+description: "Most 'free' AI apps make money from your data. ZDR Chat flips the model — you pay for tokens directly, nothing else."
+pubDate: 2026-06-21
+tags: ["pricing", "privacy", "philosophy"]
+featured: true
+---
+
+The most expensive AI apps aren't the ones that charge you. They're the ones that are **free** — because you pay with your data.
+
+## The "Free" Trap
+
+Every AI chat app needs to cover costs. GPUs aren't free. Bandwidth isn't free. Engineering salaries aren't free. So how do "free" apps make money?
+
+- **Your conversations are used for training** — improving their models at your expense
+- **Your usage data is analyzed and sold** — behavioral insights are valuable
+- **You're locked into a subscription** — month after month, even if you barely use it
+- **Your attention is monetized** — ads, upsells, premium tiers
+
+None of this is spelled out. The price is hidden in the fine print.
+
+## A Different Model
+
+ZDR Chat takes a different approach. The app itself is free — it's a static site that costs us basically nothing to host on Cloudflare's free tier. **We aren't in the business of monetizing your data or your attention.**
+
+When you use ZDR Chat, the only cost is what you choose to spend on tokens through OpenRouter. That's it.
+
+| Traditional AI App | ZDR Chat |
+|-------------------|----------|
+| Pays for servers by selling data | Pays nothing for hosting (static site) |
+| Locks you into a subscription | No subscription — pay OpenRouter directly |
+| Controls which models you can use | Any of 300+ models on OpenRouter |
+| Opaque pricing | Per-token costs shown in real-time |
+| Your data trains their models | Your data never leaves your browser |
+
+## What Privacy Actually Costs
+
+Let's be honest: running AI models costs real money. A single request to Claude Opus might cost $0.01–$0.05 depending on how much you send and receive. That adds up if you're processing entire codebases or analyzing 100-page documents.
+
+But for **everyday use** — asking questions, brainstorming, drafting emails, summarizing articles — costs are negligible. Most messages cost less than a penny.
+
+## It Helps That We Have No Skin in the Game
+
+We should be completely transparent: **we're not affiliated with OpenRouter.** We don't resell their tokens, earn commissions, or take a cut. The app is an independent, open-source frontend that happens to use OpenRouter's API.
+
+We built ZDR Chat because private AI should be accessible — not because there's money in it. The app costs us next to nothing to host, and we have no plans to monetize it. 
+
+If you want to support the project, use it, share it, and contribute on GitHub. That's all we ask.
+
+## Track Every Cent
+
+The app shows you exactly what each session costs in the status bar — tokens in, tokens out, total cost, and your remaining credit balance. No surprises, no mystery fees.
+
+Here's what $1 of OpenRouter credit gets you in practice:
+
+| Model | ~Messages per $1 |
+|------|-----------------|
+| GPT-4o Mini | ~1,000 short messages |
+| Claude Sonnet 4 | ~150 medium messages |
+| Claude Opus 4 | ~20 long messages |
+| DeepSeek V3 (free) | ∞ (until rate limits kick in) |
+
+No monthly bill. No surprise charges. Just honest, transparent per-token pricing.
+
+## The Bottom Line
+
+Privacy isn't free — GPUs require power, models require compute, and infrastructure requires maintenance. But that cost should be **transparent**, not hidden behind a "free" label that actually costs you your data.
+
+ZDR Chat makes that transparency the foundation of the experience. You see what you're spending, you control which models you use, and nothing about you is monetized.
+
+**That's the kind of cheap we can stand behind.**

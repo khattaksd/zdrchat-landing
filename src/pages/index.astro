@@ -4,28 +4,29 @@ import Hero from '../components/Hero.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import PrivacyPledge from '../components/PrivacyPledge.astro';
+import PricingSection from '../components/PricingSection.astro';
 import CTAButton from '../components/CTAButton.astro';
 
 const features = [
   {
     icon: '🔐',
     title: 'Bring Your Own Key',
-    description: 'Paste your OpenRouter API key. It\'s stored in your browser only. Never sent anywhere except directly to OpenRouter.',
+    description: 'Paste your OpenRouter API key. It\'s stored in your browser only. Never sent anywhere except directly to OpenRouter. We never see it.',
   },
   {
-    icon: '🧠',
-    title: '300+ Models — One Interface',
-    description: 'All OpenRouter models in one place. Smartest, fastest, free, code, vision — neatly bucketed so you always pick the right one.',
+    icon: '💵',
+    title: 'Pay-as-You-Go, No Subscription',
+    description: 'No monthly bills. Add as little as $1 to OpenRouter and it lasts until you spend it. The status bar tracks every cent.',
   },
   {
     icon: '🏠',
     title: 'Zero Servers',
-    description: 'No backend. No accounts. No sign-up. The entire app runs in your browser as a static PWA. Deployed to Cloudflare Pages — that\'s it.',
+    description: 'No backend. No accounts. No sign-up. The entire app runs in your browser as a static PWA. Hosting costs us ~$0/month.',
   },
   {
     icon: '💾',
     title: 'Zero Data Retention',
-    description: 'Every message, every token, every setting stays in your browser\'s IndexedDB. Close the tab — it\'s gone from the world.',
+    description: 'Every message and setting stays in your browser\'s IndexedDB. We don\'t store your conversations — we can\'t; there\'s nowhere to put them.',
   },
 ];
 ---
@@ -52,6 +53,7 @@ const features = [
     </div>
   </section>
 
+  <PricingSection />
   <HowItWorks />
   <PrivacyPledge />
 

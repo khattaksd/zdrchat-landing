@@ -1,0 +1,66 @@
+---
+title: "ZDR Chat Costs Us Next to Nothing — That's the Point"
+description: "How a static PWA on Cloudflare's free tier keeps the lights on for ~$0/month and why that's good for your privacy."
+pubDate: 2026-06-21
+tags: ["architecture", "privacy", "open-source"]
+---
+
+Here's a number that might surprise you: **ZDR Chat costs us roughly $0 per month to operate.**
+
+No, that's not a typo. The entire app — streaming chat, model picker, theme system, PWA offline support — runs on Cloudflare Pages' free tier. There are no servers to maintain, no databases to back up, no API endpoints to secure.
+
+## How Can an App Cost Nothing to Host?
+
+ZDR Chat is a **static PWA**. Everything is pre-built HTML, CSS, and JavaScript. When you load the app, your browser downloads the static files and runs them locally.
+
+| Component | What It Is | Cost |
+|-----------|-----------|------|
+| App shell | Static files on Cloudflare Pages CDN | $0 (free tier) |
+| User data | Your browser's IndexedDB (local storage) | $0 |
+| AI models | OpenRouter API (you pay them directly) | Your cost only |
+| Domain | `zdr.chat` | ~$10/year |
+| Total recurring | — | **~$0.83/month** |
+
+The only real cost is the domain name. Everything else is either free-tier infrastructure or paid directly by you to OpenRouter.
+
+## Why This Matters for Privacy
+
+An app that costs nothing to operate has **no incentive to monetize your data**.
+
+- We don't need to sell your conversations to cover server costs (there are no servers)
+- We don't need to show you ads (nobody's paying us for ad space)
+- We don't need to lock you into a subscription (we have nothing to bill you for)
+- We don't need to analyze your usage patterns (there's no database to store them in)
+
+When an app has no revenue model, the only thing it can sell is your data. When an app has **no servers**, it can't store your data even if it wanted to.
+
+## But You Have to Pay for the Models
+
+Here's the honest part: **using AI models is not free.** GPU compute costs real money — that's why OpenRouter charges per token.
+
+The difference is that those costs go entirely to the people providing the compute (OpenRouter and the underlying model providers). We don't take a cut, resell you credits at a markup, or charge a "platform fee." You put $5 in your OpenRouter account, $5 stays in your OpenRouter account.
+
+## We Have No Financial Stake
+
+We want to be completely upfront about this:
+
+> **ZDR Chat is not affiliated with OpenRouter.ai.**
+> We do not earn commissions, referral fees, or any form of compensation from OpenRouter.
+> We do not resell API access.
+> We do not charge for the app.
+>
+> We built this because private AI should be easy to access — not because there's money in it.
+
+## What We Get Out of It
+
+If we're not making money, why build it?
+
+- **Privacy advocacy.** We believe private AI should be the default, not a premium feature.
+- **A useful tool.** We use it ourselves and wanted something better.
+- **Community.** The app is open source. Contributions, ideas, and conversations matter more to us than revenue.
+
+## The Takeaway
+
+ZDR Chat exists because a modern, private AI chat app doesn't need to cost anything to run. Cloudflare Pages + IndexedDB + OpenRouter = an entire chat platform with zero server costs and zero data retention.
+
+The only thing you pay for is the AI compute you actually use. And that's exactly how it should be.
