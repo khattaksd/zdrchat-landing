@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zdr.chat/sitemap-index.xml

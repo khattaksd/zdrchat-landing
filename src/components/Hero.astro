@@ -1,0 +1,32 @@
+---
+import CTAButton from './CTAButton.astro';
+---
+
+<section class="relative overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-28">
+  <!-- Background glow -->
+  <div class="pointer-events-none absolute inset-0 -z-10">
+    <div class="absolute top-1/4 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/10 blur-3xl" />
+  </div>
+
+  <div class="container-main text-center">
+    <h1 class="text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl md:text-6xl lg:text-7xl">
+      Your Private AI.
+      <span class="gradient-text">Your Keys.</span><br />
+      Zero Servers.
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-400 sm:text-xl">
+      ZDR Chat is a serverless, BYOK chat app powered by OpenRouter.
+      No accounts. No logs. No backend. Your data never leaves your browser.
+    </p>
+
+    <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <CTAButton href="https://app.zdr.chat" external>Launch ZDR Chat</CTAButton>
+      <CTAButton href="/docs/getting-started" variant="secondary">Read the Docs</CTAButton>
+    </div>
+
+    <p class="mt-6 text-sm text-slate-500">
+      🔒 300+ models &bull; BYOK &bull; Browser-local
+    </p>
+  </div>
+</section>

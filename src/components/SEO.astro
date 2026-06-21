@@ -1,0 +1,54 @@
+---
+const { title, description, ogImage, canonical, type = 'website', publishedTime, tags = [] } = Astro.props;
+
+const siteTitle = 'ZDR Chat';
+const fullTitle = title ? `${title} — ${siteTitle}` : `${siteTitle} — Private AI, Your Keys, Zero Servers`;
+const metaDesc = description || 'ZDR Chat is a serverless, BYOK chat app powered by OpenRouter. No accounts. No logs. No backend. Your data never leaves your browser.';
+const metaImage = ogImage || '/og-image.svg';
+const canonicalUrl = canonical ? new URL(canonical, Astro.site) : Astro.url;
+
+const orgLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'ZDR Chat',
+  url: 'https://zdr.chat',
+  description: metaDesc,
+  logo: 'https://zdr.chat/favicon.svg',
+};
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteTitle,
+  url: 'https://zdr.chat',
+  description: metaDesc,
+};
+
+const articleLd = type === 'article' ? {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: metaDesc,
+  url: canonicalUrl.toString(),
+  datePublished: publishedTime,
+} : null;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={metaDesc} />
+<link rel="canonical" href={canonicalUrl} />
+<meta property="og:type" content={type} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={metaDesc} />
+<meta property="og:image" content={new URL(metaImage, Astro.site)} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={siteTitle} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={metaDesc} />
+<meta name="twitter:image" content={new URL(metaImage, Astro.site)} />
+{type === 'article' && publishedTime ? <meta property="article:published_time" content={publishedTime} /> : null}
+{tags.length > 0 ? tags.map(tag => <meta property="article:tag" content={tag} />) : null}
+<script type="application/ld+json" set:html={JSON.stringify(orgLd)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(websiteLd)}></script>
+{articleLd ? <script type="application/ld+json" set:html={JSON.stringify(articleLd)}></script> : null}

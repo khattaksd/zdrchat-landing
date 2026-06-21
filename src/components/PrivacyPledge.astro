@@ -1,0 +1,34 @@
+---
+import CTAButton from './CTAButton.astro';
+---
+
+<section class="py-20">
+  <div class="container-main">
+    <div class="mx-auto max-w-3xl rounded-2xl border border-slate-700/50 bg-slate-800/30 p-8 sm:p-12">
+      <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-500/10 text-2xl">
+        🔐
+      </div>
+      <h2 class="text-2xl font-bold text-slate-100 sm:text-3xl">The ZDR Pledge</h2>
+      <p class="mt-2 text-sm text-emerald-400 font-semibold tracking-wider uppercase">Zero Data Retention</p>
+
+      <div class="mt-6 space-y-4 text-slate-300">
+        <p>
+          <strong class="text-slate-100">ZDR (Zero Data Retention)</strong> means exactly that.
+        </p>
+        <p>
+          Your conversation history lives in your browser's IndexedDB.
+          Your API key is stored locally.
+          We run no servers, maintain no databases, log nothing.
+        </p>
+        <p>
+          Configure privacy enforcement at the OpenRouter account level,
+          and every request is ZDR-guaranteed at the network layer.
+        </p>
+      </div>
+
+      <div class="mt-8">
+        <CTAButton href="/docs/privacy-and-security" variant="secondary">Learn About Our Privacy Model</CTAButton>
+      </div>
+    </div>
+  </div>
+</section>

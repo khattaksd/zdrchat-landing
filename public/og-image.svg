@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F172A"/>
+      <stop offset="100%" style="stop-color:#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <text x="600" y="240" font-family="system-ui, sans-serif" font-size="80" font-weight="bold" fill="#10B981" text-anchor="middle" letter-spacing="2">ZDR Chat</text>
+  <text x="600" y="320" font-family="system-ui, sans-serif" font-size="36" fill="#E2E8F0" text-anchor="middle">Your Private AI. Your Keys. Zero Servers.</text>
+  <text x="600" y="400" font-family="system-ui, sans-serif" font-size="24" fill="#64748B" text-anchor="middle">Serverless · BYOK · Browser-local · 300+ models</text>
+</svg>

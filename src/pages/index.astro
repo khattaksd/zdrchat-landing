@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import PrivacyPledge from '../components/PrivacyPledge.astro';
+import CTAButton from '../components/CTAButton.astro';
+
+const features = [
+  {
+    icon: '🔐',
+    title: 'Bring Your Own Key',
+    description: 'Paste your OpenRouter API key. It\'s stored in your browser only. Never sent anywhere except directly to OpenRouter.',
+  },
+  {
+    icon: '🧠',
+    title: '300+ Models — One Interface',
+    description: 'All OpenRouter models in one place. Smartest, fastest, free, code, vision — neatly bucketed so you always pick the right one.',
+  },
+  {
+    icon: '🏠',
+    title: 'Zero Servers',
+    description: 'No backend. No accounts. No sign-up. The entire app runs in your browser as a static PWA. Deployed to Cloudflare Pages — that\'s it.',
+  },
+  {
+    icon: '💾',
+    title: 'Zero Data Retention',
+    description: 'Every message, every token, every setting stays in your browser\'s IndexedDB. Close the tab — it\'s gone from the world.',
+  },
+];
+---
+
+<BaseLayout>
+  <Hero />
+
+  <!-- Features -->
+  <section class="py-20">
+    <div class="container-main">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="section-heading">Why ZDR Chat?</h2>
+        <p class="section-subheading">Privacy-first by design. No compromises.</p>
+      </div>
+      <div class="mt-16 grid gap-6 sm:grid-cols-2">
+        {features.map(feature => (
+          <FeatureCard
+            icon={feature.icon}
+            title={feature.title}
+            description={feature.description}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <HowItWorks />
+  <PrivacyPledge />
+
+  <!-- Final CTA -->
+  <section class="py-20">
+    <div class="container-main text-center">
+      <h2 class="section-heading">Ready to chat privately?</h2>
+      <p class="section-subheading">No sign-up, no data collection, no servers. Just you and 300+ models.</p>
+      <div class="mt-10">
+        <CTAButton href="https://app.zdr.chat" external>Launch ZDR Chat</CTAButton>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

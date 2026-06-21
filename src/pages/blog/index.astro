@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout seo={{
+  title: 'Blog',
+  description: 'Articles about ZDR Chat, privacy-first AI chat, zero data retention, and bringing your own key.',
+  canonical: '/blog/',
+}}>
+  <div class="container-main py-24">
+    <header class="mx-auto max-w-2xl text-center">
+      <h1 class="section-heading">Blog</h1>
+      <p class="section-subheading">Thoughts on private AI chat, zero data retention, and building for privacy.</p>
+    </header>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {posts.map(post => (
+        <BlogCard entry={post} />
+      ))}
+    </div>
+
+    {posts.length === 0 && (
+      <p class="mt-16 text-center text-slate-500">No posts yet. Check back soon!</p>
+    )}
+  </div>
+</BaseLayout>

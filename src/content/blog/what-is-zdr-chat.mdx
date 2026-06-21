@@ -1,0 +1,60 @@
+---
+title: "What is ZDR Chat?"
+description: "A deep dive into ZDR Chat — a serverless, browser-local AI chat app that puts your privacy first."
+pubDate: 2026-06-15
+tags: ["intro", "privacy", "overview"]
+featured: true
+---
+
+Have you used an AI chat app and wondered where your conversations go? Most AI chat apps send your data to their servers — storing, analyzing, and training on your conversations. **ZDR Chat takes a radically different approach.**
+
+## The Problem
+
+When you chat with most AI assistants:
+
+- Your conversation history is stored on the provider's servers
+- Your API keys are managed by their backend
+- Your usage patterns can be tracked and analyzed
+- Your data persists even after you close the tab
+
+For privacy-conscious users, this is unacceptable.
+
+## The Solution: ZDR Chat
+
+ZDR Chat (Zero Data Retention) is a **serverless, BYOK (Bring Your Own Key) chat application** that runs entirely in your browser. Here's what makes it different:
+
+### 🔐 Browser-Local by Default
+
+Everything lives in your browser's IndexedDB:
+
+- **Conversation history** — stored locally
+- **API key** — stored locally
+- **Preferences** — stored locally
+
+When you close the tab, the connection to the model is gone. Your data remains in your browser until you choose to clear it.
+
+### 🏠 No Backend, No Servers
+
+ZDR Chat is a **static PWA** deployed to Cloudflare Pages. There is no backend server, no database, no user accounts, no sign-up flow. The entire application is static HTML, CSS, and JavaScript.
+
+### 🔑 Bring Your Own Key
+
+You paste your OpenRouter API key directly into the app. It's never sent anywhere except directly to OpenRouter when you make a request. We never see your key.
+
+### 🧠 300+ Models
+
+The app connects to OpenRouter, giving you access to 300+ models — from the latest frontier models to specialized code generators, vision models, and free options. The model picker organizes them into neat buckets so you always find the right one.
+
+## How ZDR Enforcement Works
+
+At the OpenRouter level, ZDR (Zero Data Retention) can be enforced three ways:
+
+1. **Account-level setting** — Enable ZDR for all requests from your account
+2. **Guardrail** — A safety catch that prevents per-request opt-outs
+3. **Per-request header** — The `X-ZDR: 1` header sent with every request
+
+With all three configured, your data is ZDR-guaranteed at the network layer.
+
+## Ready to try it?
+
+No sign-up, no account creation. Just [open the app](https://app.zdr.chat), paste your OpenRouter key, and start chatting. Your privacy is preserved from the first message.

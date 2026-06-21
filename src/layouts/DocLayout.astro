@@ -1,0 +1,74 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+const { frontmatter } = Astro.props;
+const title = frontmatter?.title || 'Docs';
+const description = frontmatter?.description || '';
+---
+
+<BaseLayout
+  seo={{
+    title,
+    description,
+  }}
+>
+  <div class="container-main py-24">
+    <div class="flex gap-12">
+      <!-- Sidebar -->
+      <aside class="hidden w-64 shrink-0 lg:block">
+        <nav class="sticky top-24">
+          <h2 class="mb-4 text-sm font-semibold text-slate-400 uppercase tracking-wider">Docs</h2>
+          <ul class="space-y-1">
+            <li>
+              <a
+                href="/docs/getting-started"
+                class="block rounded-lg px-3 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-slate-100"
+                class:list={{ 'bg-slate-800 text-emerald-400': Astro.url.pathname === '/docs/getting-started' }}
+              >
+                Getting Started
+              </a>
+            </li>
+            <li>
+              <a
+                href="/docs/privacy-and-security"
+                class="block rounded-lg px-3 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-slate-100"
+                class:list={{ 'bg-slate-800 text-emerald-400': Astro.url.pathname === '/docs/privacy-and-security' }}
+              >
+                Privacy & Security
+              </a>
+            </li>
+            <li>
+              <a
+                href="/docs/features"
+                class="block rounded-lg px-3 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-slate-100"
+                class:list={{ 'bg-slate-800 text-emerald-400': Astro.url.pathname === '/docs/features' }}
+              >
+                Features
+              </a>
+            </li>
+            <li>
+              <a
+                href="/docs/faq"
+                class="block rounded-lg px-3 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-800 hover:text-slate-100"
+                class:list={{ 'bg-slate-800 text-emerald-400': Astro.url.pathname === '/docs/faq' }}
+              >
+                FAQ
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="min-w-0 flex-1">
+        <header class="mb-8">
+          <h1 class="text-3xl font-bold text-slate-100 sm:text-4xl">{title}</h1>
+          {description && <p class="mt-4 text-lg text-slate-400">{description}</p>}
+        </header>
+        <div class="prose prose-invert-custom max-w-none">
+          <slot />
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>

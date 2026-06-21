@@ -1,0 +1,85 @@
+---
+title: "Privacy & Security"
+description: "How ZDR Chat protects your data and what you can do to further secure your usage."
+order: 2
+---
+
+ZDR Chat is built on a zero-trust, zero-data-retention model. This page explains the complete data flow and security architecture.
+
+## Data Flow Diagram
+
+```
+Your Browser (app.zdr.chat)
+├── IndexedDB: Conversations, messages
+├── localStorage: API key, preferences
+└── → HTTPS → openrouter.ai (API)
+         No intermediate servers
+```
+
+When you use ZDR Chat, data flows in one direction only: **from your browser to OpenRouter**. There are no intermediate servers, no databases, no logging infrastructure.
+
+## What's Stored in IndexedDB
+
+All of your conversation data is stored in your browser's IndexedDB:
+
+- **Conversations** — Your chat history, organized by conversation
+- **Messages** — Individual messages with their content, role, and model info
+- **Metadata** — Timestamps, model selections, token counts
+
+This data never leaves your browser. It persists across sessions until you clear it.
+
+## What's Stored in localStorage
+
+Your app preferences are stored in localStorage:
+
+- **API key** — Your OpenRouter key (encrypted in memory while in use)
+- **Theme preference** — Dark/light theme selection
+- **Density mode** — Tight/cozy/sparse layout
+- **Model sort** — Your preferred model sorting method
+
+## What's Sent to OpenRouter
+
+When you send a message, the following is transmitted directly to OpenRouter:
+
+1. **Your API key** (as a Bearer token)
+2. **The conversation messages** (your prompt + previous messages for context)
+3. **Model selection** (which model to use)
+4. **`X-ZDR: 1` header** (requesting zero data retention)
+
+Nothing else is sent. No analytics, no telemetry, no identifiers.
+
+## How to Clear Your Data
+
+### In the App
+
+1. Click the settings gear icon
+2. Select **Clear All Data**
+3. Confirm — this will delete all conversations, your key, and all preferences
+
+### Manually in the Browser
+
+Open your browser's developer tools:
+
+1. Go to the **Application** tab
+2. Under **Storage**, select IndexedDB and localStorage for `app.zdr.chat`
+3. Click **Clear site data**
+
+## OpenRouter Privacy Settings
+
+For maximum privacy, configure these settings in your [OpenRouter account](https://openrouter.ai/settings/privacy):
+
+### Enable Account-Level ZDR
+
+This ensures all requests from your account have zero data retention by default.
+
+### Enable the ZDR Guardrail
+
+This prevents any per-request settings from disabling ZDR. The guardrail acts as a safety net.
+
+### Additional Security Tips
+
+- Use a **strong, unique password** for your OpenRouter account
+- Enable **two-factor authentication** on OpenRouter
+- Set **spending limits** in your OpenRouter account
+- Regularly **rotate your API key**
+- If you share your computer, **clear site data** after each session

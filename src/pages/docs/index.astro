@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = await getCollection('docs');
+docs.sort((a, b) => a.data.order - b.data.order);
+
+function docSlug(doc) {
+  return doc.id.replace(/\.(md|mdx)$/, '');
+}
+---
+
+<BaseLayout seo={{
+  title: 'Documentation',
+  description: 'Learn how to use ZDR Chat — get started, understand privacy, explore features, and find answers.',
+  canonical: '/docs/',
+}}>
+  <div class="container-main py-24">
+    <header class="mx-auto max-w-2xl text-center">
+      <h1 class="section-heading">Documentation</h1>
+      <p class="section-subheading">Everything you need to know about ZDR Chat.</p>
+    </header>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2">
+      {docs.map((doc) => {
+        const slug = docSlug(doc);
+        const { data } = doc;
+        return (
+        <a href={`/docs/${slug}/`} class="card group">
+          <h3 class="text-lg font-semibold text-slate-100 group-hover:text-emerald-400 transition-colors">{data.title}</h3>
+          <p class="mt-2 text-sm text-slate-400">{data.description}</p>
+        </a>
+      );})}
+    </div>
+  </div>
+</BaseLayout>

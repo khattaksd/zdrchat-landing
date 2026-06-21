@@ -1,0 +1,60 @@
+---
+title: "Zero Data Retention — What It Actually Means"
+description: "A detailed breakdown of Zero Data Retention: what it means at the account, guardrail, and request level, and why per-request toggles can be misleading."
+pubDate: 2026-06-14
+tags: ["privacy", "ZDR", "technical"]
+---
+
+"Zero Data Retention" is a term that gets thrown around a lot in the AI space. But what does it actually mean in practice? Let's break it down.
+
+## The Three Layers of ZDR
+
+ZDR operates at three distinct layers. For true zero data retention, you want all three enabled.
+
+### Layer 1: Account-Level Setting
+
+This is the broadest layer. When you enable ZDR at the account level in your [OpenRouter settings](https://openrouter.ai/settings/privacy), it applies to **all requests** made by your account by default.
+
+**What it guarantees:** OpenRouter will not log prompts, responses, or metadata for any request made by your account.
+
+**Limitation:** A per-request setting can override this.
+
+### Layer 2: The Guardrail
+
+The guardrail is a safety mechanism that prevents per-request overrides. When enabled, it blocks any attempt to opt out of ZDR on individual requests.
+
+**What it guarantees:** Even if a client sends a header asking to disable ZDR, the guardrail enforces it.
+
+**Why it matters:** Some clients or tools might accidentally (or intentionally) send per-requests that disable ZDR. The guardrail catches these.
+
+### Layer 3: Per-Request Headers
+
+At the most granular level, each API request carries an `X-ZDR` header. ZDR Chat sends `X-ZDR: 1` with every request.
+
+**What it guarantees:** As long as the server respects the header, that single request won't be logged.
+
+**Why per-request toggles are misleading:** A client could send `X-ZDR: 0` on certain requests, opting out of ZDR for just those requests. This is why the guardrail (Layer 2) is important — it prevents these holes.
+
+## How ZDR Chat Enables All Three
+
+ZDR Chat is designed to work with all three layers:
+
+1. **Account-level:** We recommend enabling ZDR in your OpenRouter settings immediately after getting your API key.
+2. **Guardrail:** Enable the guardrail in OpenRouter settings to prevent override.
+3. **Per-request:** ZDR Chat sends `X-ZDR: 1` with every API call by default.
+
+## What Data Stays Where
+
+With ZDR Chat + OpenRouter ZDR enforcement:
+
+| Data | Location | Persists? |
+|------|----------|-----------|
+| Conversation history | Your browser (IndexedDB) | Until you clear it |
+| API key | Your browser (localStorage) | Until you clear it |
+| Preferences | Your browser (localStorage) | Until you clear it |
+| Prompts & responses | **Nowhere** (if ZDR enabled) | No |
+| Usage metadata | **Nowhere** (if ZDR enabled) | No |
+
+## The Bottom Line
+
+Zero Data Retention isn't a feature — it's a **guarantee**. With all three layers enforced, you can be confident that your AI conversations leave no trace on any server. They exist only in your browser, for your eyes only.

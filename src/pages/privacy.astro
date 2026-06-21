@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout seo={{
+  title: 'Privacy & Data Handling',
+  description: 'ZDR Chat is built on a zero-data-retention model. Your conversations, API keys, and settings stay in your browser — always.',
+}}>
+  <div class="container-main py-24">
+    <article class="mx-auto max-w-4xl">
+      <!-- Hero section -->
+      <header class="mb-20">
+        <div class="mx-auto mb-8 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500/10">
+          <span class="text-3xl">🔐</span>
+        </div>
+        <h1 class="text-center text-4xl font-bold tracking-tight text-slate-100 sm:text-5xl">
+          Your Data. Your Browser. Your Rules.
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-center text-xl leading-relaxed text-slate-400">
+          ZDR Chat was built around one conviction: <strong class="text-emerald-400">privacy isn't a feature, it's the foundation.</strong>
+          Every design decision starts and ends with keeping your data in your hands.
+        </p>
+      </header>
+
+      <!-- The Pledge -->
+      <section class="mb-20">
+        <div class="rounded-2xl border border-emerald-500/20 bg-gradient-to-br from-emerald-950/40 to-slate-900/40 p-8 sm:p-12">
+          <h2 class="mb-2 text-sm font-semibold tracking-widest text-emerald-400 uppercase">The ZDR Pledge</h2>
+          <p class="text-2xl font-bold text-slate-100 sm:text-3xl">
+            Zero Data Retention. Zero Compromise.
+          </p>
+          <p class="mt-6 text-lg leading-relaxed text-slate-300">
+            We collect nothing. We store nothing. We log nothing. Your conversation history lives in your browser's
+            IndexedDB. Your API key is stored locally. We run no servers, maintain no databases, and have no backend
+            — the entire app is a static PWA deployed to Cloudflare Pages. When you close the tab, the connection
+            to the world is gone. Your data remains in your browser, for your eyes only, until you choose to clear it.
+          </p>
+        </div>
+      </section>
+
+      <!-- Data Flow -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-2xl font-bold text-slate-100 sm:text-3xl">Where Your Data Lives</h2>
+
+        <div class="grid gap-6 sm:grid-cols-3">
+          <div class="rounded-xl border border-slate-700/50 bg-slate-800/40 p-6">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-500/10">
+              <svg class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-slate-100">Conversations</h3>
+            <p class="text-base leading-relaxed text-slate-400">
+              Every message lives in your browser's <strong class="text-slate-300">IndexedDB</strong>.
+              Organized by conversation, searchable, exportable. Never copied anywhere else.
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-slate-700/50 bg-slate-800/40 p-6">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-500/10">
+              <svg class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-slate-100">Your API Key</h3>
+            <p class="text-base leading-relaxed text-slate-400">
+              Stored in <strong class="text-slate-300">localStorage</strong>. Read only when making a request.
+              <em>We never see it — not even once.</em>
+            </p>
+          </div>
+
+          <div class="rounded-xl border border-slate-700/50 bg-slate-800/40 p-6">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-500/10">
+              <svg class="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <h3 class="mb-2 text-lg font-semibold text-slate-100">Preferences</h3>
+            <p class="text-base leading-relaxed text-slate-400">
+              Theme, density mode, model sort — all in <strong class="text-slate-300">localStorage</strong>.
+              Persistent across sessions, gone when you clear your data.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Data Flow Diagram -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-2xl font-bold text-slate-100 sm:text-3xl">The Only Data Flow</h2>
+        <p class="mb-8 text-lg text-slate-400">
+          There is exactly one network request in ZDR Chat: from your browser to OpenRouter. Nothing more.
+        </p>
+
+        <div class="overflow-hidden rounded-xl border border-slate-700/50 bg-slate-800/30">
+          <div class="grid grid-cols-3 divide-x divide-slate-700/50">
+            <div class="p-6 text-center sm:p-8">
+              <div class="mb-3 flex items-center justify-center gap-2">
+                <span class="text-2xl">🌐</span>
+                <span class="text-sm font-semibold text-slate-400 uppercase tracking-wider">Your Browser</span>
+              </div>
+              <p class="text-sm text-slate-400">
+                Key from localStorage<br />
+                Messages from IndexedDB<br />
+                Sent via HTTPS
+              </p>
+            </div>
+            <div class="flex items-center justify-center p-4">
+              <div class="flex items-center gap-2 text-emerald-400">
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+                <span class="text-sm font-medium">HTTPS</span>
+              </div>
+            </div>
+            <div class="p-6 text-center sm:p-8">
+              <div class="mb-3 flex items-center justify-center gap-2">
+                <span class="text-2xl">🤖</span>
+                <span class="text-sm font-semibold text-slate-400 uppercase tracking-wider">OpenRouter</span>
+              </div>
+              <p class="text-sm text-slate-400">
+                Receives your request<br />
+                Streams the response<br />
+                <span class="text-emerald-400">ZDR enforced</span>
+              </p>
+            </div>
+          </div>
+          <div class="border-t border-slate-700/50 bg-slate-800/50 px-6 py-4 text-center text-sm text-slate-500">
+            ↳ No intermediate servers. No databases. No logging. No analytics.
+          </div>
+        </div>
+      </section>
+
+      <!-- What never happens -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-2xl font-bold text-slate-100 sm:text-3xl">What Never Happens</h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="flex items-start gap-4 rounded-xl border border-red-900/30 bg-red-950/20 p-5">
+            <span class="mt-0.5 text-xl">✗</span>
+            <div>
+              <h3 class="font-semibold text-slate-100">No data collection</h3>
+              <p class="mt-1 text-sm text-slate-400">We don't collect, store, or transmit any usage data, analytics, or telemetry.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 rounded-xl border border-red-900/30 bg-red-950/20 p-5">
+            <span class="mt-0.5 text-xl">✗</span>
+            <div>
+              <h3 class="font-semibold text-slate-100">No accounts</h3>
+              <p class="mt-1 text-sm text-slate-400">No sign-up, no user IDs, no profiles. You don't exist in our database because there is no database.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 rounded-xl border border-red-900/30 bg-red-950/20 p-5">
+            <span class="mt-0.5 text-xl">✗</span>
+            <div>
+              <h3 class="font-semibold text-slate-100">No tracking scripts</h3>
+              <p class="mt-1 text-sm text-slate-400">Zero analytics, zero pixels, zero cookies. The page loads and that's it.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 rounded-xl border border-red-900/30 bg-red-950/20 p-5">
+            <span class="mt-0.5 text-xl">✗</span>
+            <div>
+              <h3 class="font-semibold text-slate-100">No data selling</h3>
+              <p class="mt-1 text-sm text-slate-400">There's nothing to sell — we never have your data in the first place.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Clear Your Data -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-2xl font-bold text-slate-100 sm:text-3xl">Clearing Your Data</h2>
+        <p class="mb-6 text-lg text-slate-400">
+          Because everything is local, clearing your data is straightforward — and immediate.
+        </p>
+        <div class="grid gap-6 sm:grid-cols-2">
+          <div class="rounded-xl border border-slate-700/50 bg-slate-800/40 p-6">
+            <h3 class="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-sm">1</span>
+              In the App
+            </h3>
+            <p class="text-base leading-relaxed text-slate-400">
+              Click the settings gear, select <strong class="text-slate-300">Clear All Data</strong>, confirm.
+              Every conversation, your API key, and all preferences are gone instantly.
+            </p>
+          </div>
+          <div class="rounded-xl border border-slate-700/50 bg-slate-800/40 p-6">
+            <h3 class="mb-4 flex items-center gap-2 text-lg font-semibold text-slate-100">
+              <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 text-sm">2</span>
+              In Your Browser
+            </h3>
+            <p class="text-base leading-relaxed text-slate-400">
+              Open DevTools → Application → Clear site data for <code class="text-emerald-300">app.zdr.chat</code>.
+              Same result: everything gone, no traces anywhere.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- OpenRouter ZDR -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-2xl font-bold text-slate-100 sm:text-3xl">Enforcing ZDR at the Network Layer</h2>
+        <p class="mb-6 text-lg text-slate-400">
+          ZDR Chat sends <code class="text-emerald-300">X-ZDR: 1</code> with every request, but for full enforcement,
+          configure your OpenRouter account:
+        </p>
+        <div class="space-y-4">
+          <div class="flex items-start gap-4 rounded-xl border border-slate-700/50 bg-slate-800/40 p-5">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 font-bold text-emerald-400">1</span>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-100">Enable ZDR at the account level</h3>
+              <p class="mt-1 text-base text-slate-400">
+                Visit <a href="https://openrouter.ai/settings/privacy" class="text-emerald-400 hover:underline">OpenRouter Privacy Settings</a>
+                and switch on Zero Data Retention. This applies to all requests from your account by default.
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 rounded-xl border border-slate-700/50 bg-slate-800/40 p-5">
+            <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 font-bold text-emerald-400">2</span>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-100">Enable the ZDR guardrail</h3>
+              <p class="mt-1 text-base text-slate-400">
+                This prevents per-request settings from disabling ZDR. Think of it as a safety catch — if a client
+                accidentally sends <code class="text-emerald-300">X-ZDR: 0</code>, the guardrail blocks it.
+              </p>
+            </div>
+          </div>
+        </div>
+        <p class="mt-8 text-base text-slate-500">
+          With both enabled, every request is ZDR-guaranteed at the network layer. OpenRouter will not log your prompts,
+          responses, or metadata — period.
+        </p>
+      </section>
+
+      <!-- Services -->
+      <section class="mb-20">
+        <h2 class="mb-8 text-2xl font-bold text-slate-100 sm:text-3xl">Third-Party Services</h2>
+        <p class="text-lg leading-relaxed text-slate-300">
+          The only external service ZDR Chat connects to is <strong class="text-slate-100">OpenRouter</strong>.
+          We use no analytics, no tracking scripts, no CDN fonts, and no external embeds.
+          The site is deployed on Cloudflare Pages, which handles DNS and CDN routing
+          — it does not process your application data.
+        </p>
+      </section>
+
+      <!-- Final word -->
+      <section>
+        <div class="rounded-2xl border border-slate-700/50 bg-slate-800/30 p-8 text-center sm:p-12">
+          <p class="text-xl font-semibold text-slate-100">
+            Privacy isn't a policy — it's the product.
+          </p>
+          <p class="mt-4 text-base text-slate-400">
+            If you have questions, concerns, or ideas, reach out on{' '}
+            <a href="https://github.com/khattaksd/zdrchat" class="text-emerald-400 hover:underline">GitHub</a>.
+          </p>
+        </div>
+      </section>
+    </article>
+  </div>
+</BaseLayout>
