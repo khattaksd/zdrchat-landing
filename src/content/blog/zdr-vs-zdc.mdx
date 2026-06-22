@@ -1,0 +1,93 @@
+---
+title: "ZDR vs ZDC — Why Data Retention and Data Collection Aren't the Same Thing"
+description: "A deep dive into the difference between Zero Data Retention and Zero Data Collection, why one is a subset of the other, and how we built model-level filtering for one but not the other."
+pubDate: 2026-06-22
+tags: ["privacy", "ZDR", "ZDC", "technical", "research"]
+featured: true
+---
+
+If you've poked around the privacy settings of ZDR Chat, you might have noticed two toggles: **ZDR** (Zero Data Retention) and **ZDC** (Zero Data Collection). They sound like the same thing, but they're not — and understanding the difference took a fair amount of research into OpenRouter's API and provider policies.
+
+## What We Found
+
+### ZDR: No Data Stored
+
+Zero Data Retention means the provider does **not store your prompts or responses** after processing them. Your conversation leaves no trace on their servers. OpenRouter maintains a programmatic list of endpoints that comply with ZDR, available at:
+
+```
+GET /api/v1/endpoints/zdr
+```
+
+This returns **635+ endpoints** across dozens of providers (Anthropic, Google Vertex, Amazon Bedrock, DeepInfra, etc.). Because this API exists, ZDR Chat can **pre-filter models** in the model picker — if a model has ZDR-compliant endpoints, it gets tagged with a `ZDR` badge and can be filtered to show only privacy-compliant options.
+
+### ZDC: No Data Training
+
+Zero Data Collection means the provider does **not train their models** on your prompts or responses. This is a weaker guarantee than ZDR — a provider can retain your data (for abuse monitoring, legal compliance, etc.) without training on it.
+
+OpenRouter's documentation puts it succinctly:
+
+> *"Providers that do not retain your data are also unable to train on your data. However we do have some endpoints & providers who do not train on your data but do retain it (e.g. to scan for abuse or for legal reasons)."*
+
+This means the relationship is:
+
+```
+ZDR (no retention)  ⊆  No training
+```
+
+Every ZDR endpoint is also no-training, but **not every no-training endpoint is ZDR**. Providers like OpenAI (30-day retention), Azure, and others may retain data temporarily while still honoring `dataCollection: "deny"`.
+
+### The Critical Difference
+
+| | ZDR | ZDC |
+|---|---|---|
+| **What it prevents** | Data storage | Model training |
+| **Programmatic endpoint list** | ✅ `/api/v1/endpoints/zdr` | ❌ No API available |
+| **Can we pre-filter models?** | ✅ Yes | ❌ No |
+| **Enforcement** | Request body: `provider.zdr: true` | Request body: `provider.dataCollection: "deny"` |
+
+## The Problem We Had to Solve
+
+When building ZDR Chat, we initially tried to treat ZDR and ZDC symmetrically — both would get badges in the model picker, both would filter the model list, both would be enforced at request time. But we quickly hit a wall.
+
+### ZDR Has an API. ZDC Doesn't.
+
+OpenRouter exposes a list of ZDR-compliant endpoints via their API. We can fetch this list at startup, cross-reference it against the model catalog, and tag each model with `hasZdrEndpoint: true/false`. This lets us:
+
+- Show a `ZDR` badge on each model row
+- Filter the model picker to only ZDR models when the setting is on
+- Send `provider.zdr: true` in the request body for belt-and-suspenders enforcement
+
+For ZDC, there simply isn't a comparable API. The `dataCollection: "deny"` parameter is a **routing-time preference** — OpenRouter evaluates it when the request is sent, checks which providers support it, and routes accordingly (or errors if none do).
+
+### Why We Can't Use ZDR as a Proxy
+
+Our first instinct was: since ZDR ⊆ no training, just use the ZDR endpoint list as a proxy for ZDC filtering. But that would be **too restrictive** — it would hide models served by OpenAI, Azure, and other providers that retain data temporarily but don't train on it.
+
+When we confirmed this with OpenRouter's own documentation, the approach became clear.
+
+## The Final Approach
+
+| Layer | ZDR | ZDC |
+|---|---|---|
+| **Settings toggle** | ✅ `settings.zdrOnly` | ✅ `settings.noTraining` |
+| **Model picker** | ✅ ZDR badge + filter | ❌ No badge (no data to filter by) |
+| **API request** | `provider: { zdr: true }` | `provider: { dataCollection: 'deny' }` |
+| **Error handling** | Caught + displayed | Caught + displayed |
+
+ZDR gets the full treatment because the API supports it. ZDC operates silently — it's enforced at request time, invisible until OpenRouter can't find a compliant provider.
+
+### Why Keep ZDC at All?
+
+Because even without pre-filtering, sending `dataCollection: "deny"` at request time provides a **real privacy guarantee**. If every available provider for your model trains on data, the request fails rather than silently compromising your privacy. It's an additional layer of protection that costs nothing to add.
+
+## What We Learned
+
+1. **APIs drive UI capabilities.** If OpenRouter exposed a ZDC endpoint list, we'd give it the same badge-and-filter treatment as ZDR. Without it, the model picker can only show what it knows.
+
+2. **Provider-level vs model-level semantics.** ZDR is endpoint-level (a specific provider serving a specific model has or doesn't have ZDR). ZDC is provider-level (a provider either does or doesn't train on data). These are different scopes and need different handling.
+
+3. **Per-request enforcement is still valuable.** Even without visible UI, sending `dataCollection: "deny"` in the request body acts as a safety net. If the user's chosen model happens to be served by a provider that trains on data, OpenRouter will refuse the request rather than silently training on their conversation.
+
+---
+
+*ZDR Chat is an independent, open-source project. Not affiliated with OpenRouter.ai — we don't earn commissions, resell tokens, or track usage. Built for privacy, not profit.*
