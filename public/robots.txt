@@ -1,4 +1,17 @@
+# ZDR Chat — robots.txt
+# https://www.rfc-editor.org/rfc/rfc9309
+
 User-agent: *
 Allow: /
 
+# ── Content-Signal Directives ────────────────────────────────────────
+# https://contentsignals.org/
+# Declares AI content usage preferences per draft-romm-aipref-contentsignals
+#
+#   ai-train=no   : Do NOT train AI models on this content
+#   search=yes    : Allow AI search indexing and retrieval
+#   ai-input=no   : Do NOT use this content as input for AI training
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+# ── Sitemaps ─────────────────────────────────────────────────────────
 Sitemap: https://zdr.chat/sitemap-index.xml

@@ -1,0 +1,33 @@
+# ── ZDR Chat — Cloudflare _Headers ──────────────────────────────────
+# Supplementary headers for agent discovery.
+# Middleware also adds these headers at runtime in hybrid/SSR mode.
+# This file ensures they are present even on cached/static responses.
+
+# Root and all HTML pages
+/*
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+  Link: </.well-known/mcp/server-card.json>; rel="mcp-server-card"
+  Link: </.well-known/agent-skills/index.json>; rel="agent-skills"
+  Link: </auth.md>; rel="auth-md"
+  Link: </docs/>; rel="service-doc"
+  Link: </privacy/>; rel="privacy-policy"
+
+# JSON endpoints
+/.well-known/*
+  Access-Control-Allow-Origin: *
+  Content-Type: application/json
+
+# Specific overrides
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+
+/.well-known/agent-skills/dns-aid
+  Content-Type: text/markdown
+  Access-Control-Allow-Origin: *
+
+/auth.md
+  Content-Type: text/markdown
+  Access-Control-Allow-Origin: *
+
+/robots.txt
+  Content-Type: text/plain

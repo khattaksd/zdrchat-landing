@@ -28,5 +28,70 @@ const { seo } = Astro.props;
       <slot />
     </main>
     <Footer />
+
+    <!-- WebMCP: Expose site tools to AI agents via the browser -->
+    <!-- https://webmachinelearning.github.io/webmcp/ -->
+    <script>
+      (() => {
+        if (typeof navigator.modelContext?.provideContext !== 'function') return;
+
+        navigator.modelContext.provideContext([
+          {
+            name: 'navigate_to_docs',
+            description: 'Navigate to the ZDR Chat documentation page',
+            inputSchema: {
+              type: 'object',
+              properties: {
+                section: {
+                  type: 'string',
+                  description: 'Optional documentation section slug (e.g., getting-started, features, faq)',
+                },
+              },
+            },
+            execute: async ({ section }) => {
+              const path = section ? `/docs/${section}/` : '/docs/';
+              window.location.href = path;
+              return { success: true, path };
+            },
+          },
+          {
+            name: 'navigate_to_blog',
+            description: 'Navigate to the ZDR Chat blog page',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+            execute: async () => {
+              window.location.href = '/blog/';
+              return { success: true };
+            },
+          },
+          {
+            name: 'navigate_to_privacy',
+            description: 'Navigate to the ZDR Chat privacy policy page',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+            execute: async () => {
+              window.location.href = '/privacy/';
+              return { success: true };
+            },
+          },
+          {
+            name: 'launch_app',
+            description: 'Launch the ZDR Chat application (opens app.zdr.chat in new tab)',
+            inputSchema: {
+              type: 'object',
+              properties: {},
+            },
+            execute: async () => {
+              window.open('https://app.zdr.chat', '_blank');
+              return { success: true };
+            },
+          },
+        ]);
+      })();
+    </script>
   </body>
 </html>
