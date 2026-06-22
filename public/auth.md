@@ -1,26 +1,27 @@
-# ZDR Chat — Agent Authentication
+# auth.md — ZDR Chat Agent Authentication
 
-## Overview
+ZDR Chat is a **bring-your-own-key (BYOK)** chat application. There is no traditional user registration or OAuth flow. Users authenticate by providing their own OpenRouter API key directly in the browser.
 
-ZDR Chat is a bring-your-own-key (BYOK) chat application. There is no traditional user registration or OAuth flow — users authenticate by providing their own OpenRouter API key.
+## Agent Audience
 
-## Authentication for Agents
+This authentication model is designed for **agent-to-service** scenarios where an AI agent needs to make authenticated requests to OpenRouter's API on behalf of a user who already has an API key.
 
-### Identity Types Supported
+## Registration
 
-- `api_key` — Users provide an OpenRouter API key
-
-### Credential Types Supported
-
-- `bearer_token` — API key passed as `Authorization: Bearer <key>` header
-
-### Registering
-
-To use ZDR Chat, get an API key from OpenRouter:
+Users obtain an API key from OpenRouter:
 
 ```
 https://openrouter.ai/keys
 ```
+
+There is no separate registration with ZDR Chat — the app has no accounts, no backend, and no user database.
+
+## Supported Authentication Methods
+
+| Method | Description |
+|--------|-------------|
+| `api_key` | Bearer token passed as `Authorization: Bearer <key>` header |
+| `bearer_token` | API key used directly |
 
 ### Making Authenticated Requests
 
@@ -35,22 +36,23 @@ Content-Type: application/json
 }
 ```
 
-### Resource Information
+The API key is sent directly from the user's browser to OpenRouter. ZDR Chat never sees or stores the key.
 
-- **Issuer**: `https://zdr.chat`
-- **Authorization Server**: `https://zdr.chat/.well-known/oauth-authorization-server`
-- **Protected Resource Metadata**: `https://zdr.chat/.well-known/oauth-protected-resource`
+## Resource Information
+
+- **Service**: `https://zdr.chat`
 - **API Catalog**: `https://zdr.chat/.well-known/api-catalog`
+- **Documentation**: `https://zdr.chat/docs/`
 
-### Revocation
+## Revocation
 
-Revoke or manage your API keys at:
+Users can revoke or manage API keys at any time:
 
 ```
 https://openrouter.ai/keys
 ```
 
-### Privacy
+## Privacy
 
 ZDR Chat has zero data retention. Conversations and API keys stay in your browser. See [privacy policy](https://zdr.chat/privacy/).
 
