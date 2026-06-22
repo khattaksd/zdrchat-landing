@@ -70,14 +70,7 @@ src/
 
 ## 🌐 Deployment
 
-The site is deployed to **Cloudflare Pages**. The build output goes to `dist/`.
-
-### Setup
-
-1. Connect the GitHub repo to Cloudflare Pages
-2. Set **Build command** to `npm run build`
-3. Set **Build output** to `dist/`
-4. Add custom domain `zdr.chat` in Cloudflare dashboard
+The site is deployed to **Cloudflare Pages** via GitHub integration — push to `main` triggers an automatic build and deploy. No manual wrangler commands or GitHub Actions workflows needed.
 
 ## 🔒 Privacy
 
