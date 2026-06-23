@@ -12,6 +12,10 @@
   Link: </docs/>; rel="service-doc"
   Link: </privacy/>; rel="privacy-policy"
 
+# Sitemaps — no Link headers, clean response for crawlers
+/sitemap*
+  ! Link
+
 # JSON endpoints
 /.well-known/*
   Access-Control-Allow-Origin: *
